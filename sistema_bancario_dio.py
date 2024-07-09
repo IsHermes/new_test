@@ -20,7 +20,8 @@ def depositar(saldo, valor, extrato, /):
 
     return saldo, extrato
 
-def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
+def sacar(*,saldo, valor, extrato, limite, numero_saques, limite_saques):
+    
     excedeu_saldo = valor > saldo
     excedeu_limite = valor > limite
     excedeu_saques = numero_saques >= limite_saques
@@ -50,7 +51,7 @@ def exibir_extrato(saldo, /, *, extrato):
 
 def criar_usuario(usuarios):
      cpf = str(input("Informe o CPF(somente numeros): "))
-     usuario = filtrar_usuarios(cpf, usuarios)
+     usuario = filtrar_usuario(cpf, usuarios)
 
      if usuario:
           print("Usuario ja cadastrado")
@@ -110,16 +111,15 @@ def main():
         elif opcao =="s":
             valor = float(input("Informe o valor do saque: "))
 
-            saldo, extrato =  sacar(
+            saldo, extrato =   {
 
-                saldo=saldo,
-                valor=valor,
-                extrato=extrato,
-                limite=limite,
-                numero_saques=numero_saques,
-                limite_saques=LIMITE_SAQUES,
-            )
-
+                "saldo":saldo,
+                "valor":valor,
+                "extrato":extrato,
+                "limite":limite,
+                "numero_saques":numero_saques,
+                "limite_saques":LIMITE_SAQUES
+            }
         elif opcao == "e":
             exibir_extrato(saldo, extrato=extrato)
 
@@ -142,4 +142,4 @@ def main():
         else:
             print("Operação inválida, por favor selecione novamente a operação desejada.")     
 
-main()
+    main()
